@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> 
+    <style>
+        body {
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+        }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .contact-header h1 {
+            font-size: 48px;
+            margin: 0;
+            display: inline-block;
+            padding: 10px 20px; /* Adjust padding to create a slight curve */
+            border-radius: 30px; /* Create a slight curve */
+            background-color: #ccc; /* Grey background color */
+            animation: popUp 1s ease-in-out;
+        }
+        .contact-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .contact-box {
+            width: calc(50% - 20px);
+            background-color: #f0f0f0; /* Grey background color */
+            padding: 20px;
+            border-radius: 30px; /* Slightly curved edges */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .contact-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .contact-box h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .contact-box p {
+            color: #666;
+            margin: 0;
+        }
+        @media (max-width: 600px) {
+            .contact-box {
+                width: 100%;
+            }
+        }
+        @keyframes popUp {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="contact-header animate__animated animate__bounceInDown"> 
+            <h1>CONTACT</h1> 
+        </div>
+        <div class="contact-details">
+            <div class="contact-box animate__animated animate__fadeInLeft"> 
+                <h2>Email</h2>
+                <p>MMUCyberPartTimeJobs@gmail.com</p>
+            </div>
+            <div class="contact-box animate__animated animate__fadeInRight"> 
+                <h2>Admission Office</h2>
+                <p>Tel: +603 – 8312 5803</p>
+                <p>Fax: +603 – 8312 5080</p>
+            </div>
+            <div class="contact-box animate__animated animate__fadeInLeft"> 
+                <h2>Institute for Postgraduate Studies (IPS)</h2>
+                <p>Tel: +603 – 8312 5276 / 5182</p>
+                <p>Fax: +603 – 8312 5300</p>
+                <p>Address: Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</p>
+                <p>Business Hours: Mon-Fri (8.30am-5.00pm) (GMT+8)</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

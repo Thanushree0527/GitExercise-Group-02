@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Part-Time Jobs Portal Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #808080; /* Grey background color */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f5f5f5; /* Light grey for header contrast */
+            animation: slideDown 1s ease-out;
+        }
+        header img {
+            width: 150px; /* Standard size */
+            height: auto;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #333; /* Dark grey for links */
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0;
+            animation: popUp 1s forwards;
+        }
+        .nav-links a:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+        .nav-links a:nth-child(2) {
+            animation-delay: 1s;
+        }
+        .nav-links a:nth-child(3) {
+            animation-delay: 1.5s;
+        }
+        .menu {
+            position: relative;
+            display: inline-block;
+            animation-delay: 2s;
+            opacity: 0;
+            animation: popUp 1s forwards;
+        }
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+            background-color: #333; /* Dark grey for menu icon */
+            padding: 10px;
+            border-radius: 50%;
+            color: white;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #333; /* Dark grey for dropdown */
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-radius: 0;
+        }
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+        .menu:hover .dropdown-content {
+            display: block;
+        }
+        main {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .chat-container { 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            width: 300px; 
+            margin: 50px auto; 
+        } 
+        #chat-box { 
+            max-height: 300px; 
+            overflow-y: auto; 
+            margin-bottom: 20px; 
+        } 
+        form { 
+            display: flex; 
+            flex-direction: column; 
+        } 
+        input, textarea { 
+            margin-bottom: 10px; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+        } 
+        button { 
+            padding: 10px; 
+            background: #007bff; 
+            color: #fff; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        } 
+        button:hover { 
+            background: #0056b3; 
+        } 
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        @keyframes popUp {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        <div class="nav-links">
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <div class="menu">
+                <span class="menu-icon">&#x22EE;</span>
+                <div class="dropdown-content">
+                    <a href="/jobs">View Available Jobs</a>
+                    <a href="/contact">Contact Us</a>
+                    <a href="/resume">Resume Requirements</a>
+                    <a href="/faq">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>Welcome to Part-Time Jobs Portal MMU</h1>
+        <p>Welcome to MMU Part-Time Jobs, your dedicated portal for balancing work and study! Whether you're looking for a flexible job to fit around your classes or aiming to gain valuable work experience, we have a variety of opportunities just for you. Explore our listings, create a standout profile, and connect with local employers. Your perfect part-time job is just a few clicks away!</p>
+    
+        <div class="chat-container"> 
+            <form id="chat-form" action="/submit_chat" method="post"> 
+                <input type="text" id="first-name" name="firstName" placeholder="First Name" required> 
+                <input type="text" id="last-name" name="lastName" placeholder="Last Name" required>
+                <input type="email" id="email" name="email" placeholder="Email" required> 
+                <input type="text" id="mobile" name="mobile" placeholder="Mobile" required> 
+                <input type="text" id="nationality" name="nationality" placeholder="Nationality" required> 
+                <input type="text" id="interested-job" name="interestedJob" placeholder="Interested Part-time Job" required> 
+                <textarea id="inquiries" name="inquiries" placeholder="Any Inquiries" required></textarea> 
+                <button type="submit">Submit</button> 
+            </form> 
+        </div> 
+    </main> 
+</body> 
+</html> 
