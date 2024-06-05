@@ -87,6 +87,40 @@
             text-align: center;
             margin-top: 50px;
         }
+        .chat-container { 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            width: 300px; 
+            margin: 50px auto; 
+        } 
+        #chat-box { 
+            max-height: 300px; 
+            overflow-y: auto; 
+            margin-bottom: 20px; 
+        } 
+        form { 
+            display: flex; 
+            flex-direction: column; 
+        } 
+        input, textarea { 
+            margin-bottom: 10px; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+        } 
+        button { 
+            padding: 10px; 
+            background: #007bff; 
+            color: #fff; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        } 
+        button:hover { 
+            background: #0056b3; 
+        } 
         @keyframes slideDown {
             from {
                 transform: translateY(-100%);
@@ -118,6 +152,8 @@
                 <div class="dropdown-content">
                     <a href="/jobs">View Available Jobs</a>
                     <a href="/contact">Contact Us</a>
+                    <a href="/resume">Resume Requirements</a>
+                    <a href="/faq">FAQ</a>
                 </div>
             </div>
         </div>
@@ -125,6 +161,19 @@
     <main>
         <h1>Welcome to Part-Time Jobs Portal MMU</h1>
         <p>Welcome to MMU Part-Time Jobs, your dedicated portal for balancing work and study! Whether you're looking for a flexible job to fit around your classes or aiming to gain valuable work experience, we have a variety of opportunities just for you. Explore our listings, create a standout profile, and connect with local employers. Your perfect part-time job is just a few clicks away!</p>
-    </main>
-</body>
-</html>
+    
+        <div class="chat-container"> 
+            <form id="chat-form" action="/submit_chat" method="post"> 
+                <input type="text" id="first-name" name="firstName" placeholder="First Name" required> 
+                <input type="text" id="last-name" name="lastName" placeholder="Last Name" required>
+                <input type="email" id="email" name="email" placeholder="Email" required> 
+                <input type="text" id="mobile" name="mobile" placeholder="Mobile" required> 
+                <input type="text" id="nationality" name="nationality" placeholder="Nationality" required> 
+                <input type="text" id="interested-job" name="interestedJob" placeholder="Interested Part-time Job" required> 
+                <textarea id="inquiries" name="inquiries" placeholder="Any Inquiries" required></textarea> 
+                <button type="submit">Submit</button> 
+            </form> 
+        </div> 
+    </main> 
+</body> 
+</html> 
