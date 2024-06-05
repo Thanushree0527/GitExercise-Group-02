@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Jobs</title>
     <style>
         body {
@@ -21,12 +22,18 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out; /* Fade-in animation */
         }
 
         .job-list li {
             margin-bottom: 30px;
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
+            transition: transform 0.3s; /* Smooth transition for card flip animation */
+        }
+
+        .job-list li:hover {
+            transform: scale(1.02); /* Scale up on hover */
         }
 
         .job-list li h3 {
@@ -41,6 +48,29 @@
             border: none;
             border-top: 1px solid #ddd;
             margin: 10px 0;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        
+        .button:hover {
+            background: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -72,6 +102,30 @@
             <hr>
         </li>
         <li>
+            <h3>Database Administrator - <em>Computing and Informatics</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Be prepared to discuss your experience with database management systems (e.g., MySQL, PostgreSQL, Oracle) and your knowledge of database design principles. Expect questions on database performance tuning, backup and recovery strategies, and data security measures. You may also be asked about your familiarity with SQL queries and scripting languages.</p>
+            <hr>
+            <p><strong>News:</strong> Database administrators are managing increasingly large and complex datasets as organizations accumulate more data from various sources. The adoption of cloud databases and NoSQL solutions is reshaping traditional database management practices, requiring DBAs to adapt to new technologies and scalability challenges.</p>
+            <hr>
+        </li>
+        <li>
+            <h3>Cybersecurity Engineer - <em>Computing and Informatics</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Be prepared to discuss your experience in cybersecurity operations, threat intelligence analysis, and security incident response. Expect questions on your knowledge of security frameworks (e.g., NIST, ISO 27001) and your proficiency with security tools (e.g., SIEM, IDS/IPS, EDR). You may also be asked about your understanding of ethical hacking techniques and your ability to conduct penetration testing.</p>
+            <hr>
+            <p><strong>News:</strong> Cybersecurity engineers are combating sophisticated cyber threats through proactive threat hunting, vulnerability management, and security awareness training. The rise of zero-trust security architectures and identity and access management (IAM) solutions is enhancing organizations' resilience against cyber attacks and data breaches.</p>
+            <hr>
+        </li>
+        <li>
+            <h3>Systems Administrator - <em>Computing and Informatics</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Be prepared to discuss your experience in managing computer systems, networks, and servers. Expect questions on your knowledge of operating systems (e.g., Linux, Windows) and your proficiency in system troubleshooting and performance tuning. You may also be asked about your experience with virtualization technologies (e.g., VMware, Hyper-V) and your ability to implement and maintain security policies.<p>
+            <hr>
+            <p><strong>News:</strong> Systems administrators are adapting to the evolving IT landscape by embracing automation, cloud technologies, and containerization. The shift towards hybrid and multi-cloud environments is driving the need for systems administrators with expertise in cloud migration, orchestration, and management. There's a growing emphasis on proactive monitoring and predictive analytics to ensure the reliability and security of IT infrastructure.</p>
+            <hr>
+        </li>
+        <li>
             <h3>Mechanical Engineer - <em>Engineering</em></h3>
             <hr>
             <p><strong>Interview Details:</strong> Candidates will undergo a technical interview focusing on engineering principles.</p>
@@ -93,6 +147,30 @@
             <p><strong>Interview Details:</strong>  Prepare to discuss your experience with process optimization, safety protocols, and your understanding of chemical reactions and materials.</p>
             <hr>
             <p><strong>News:</strong> With the push for sustainable manufacturing, chemical engineers are increasingly involved in developing eco-friendly production processes and materials.</p>
+            <hr>
+        </li>
+        <li>
+            <h3>Software Engineer - <em>Engineering</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Be ready to demonstrate your coding skills, problem-solving abilities, and familiarity with software development methodologies (e.g., Agile, Scrum). Expect technical questions related to programming languages (e.g., Python, Java, JavaScript), algorithms, and data structures. You may also be asked about your experience with version control systems (e.g., Git) and debugging techniques.</p>
+            <hr>
+            <p><strong>News:</strong> Software engineers are increasingly focused on developing AI and machine learning applications, cybersecurity solutions, and cloud-based technologies. With the rise of remote work, collaboration tools and virtual environments are becoming essential for software development teams.</p>
+            <hr>
+        </li>
+        <li>
+            <h3>Environmental Engineer - <em>Engineering</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Be ready to discuss your expertise in environmental regulations, pollution control technologies, and risk assessment. Expect questions on your experience with environmental impact assessments, remediation strategies, and sustainability initiatives. You may also be asked about your communication skills and ability to work with regulatory agencies and community stakeholders.</p>
+            <hr>
+            <p><strong>News:</strong> Environmental engineers are addressing pressing environmental challenges such as climate change, air and water pollution, and waste management. There's a growing demand for environmental engineers with expertise in renewable energy, sustainable infrastructure development, and environmental monitoring and modeling.</p>
+            <hr>
+        </li>
+        <li>
+            <h3>Biomedical Engineer - <em>Engineering</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Prepare to discuss your experience in medical device design, biomaterials, and biomechanics. Expect questions on your knowledge of human anatomy and physiology, FDA regulations, and quality assurance standards in the healthcare industry. You may also be asked about your experience with biomedical imaging techniques and medical software development.<p>
+            <hr>
+            <p><strong>News:</strong> Biomedical engineers are at the forefront of healthcare innovation, developing medical devices, diagnostic tools, and regenerative therapies. There's a growing focus on personalized medicine, wearable health technologies, and telemedicine solutions, driven by advances in bioinformatics, genomics, and AI.</p>
             <hr>
         </li>
         <li>
@@ -120,6 +198,30 @@
             <hr>
         </li>
         <li>
+            <h3>Product Manager - <em>Management</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Expect to be asked about your experience with product lifecycle management, your approach to prioritizing product features, and how you gather and use customer feedback. Demonstrating your ability to collaborate across departments and manage timelines is crucial.</p>
+            <hr>
+            <p><strong>News:</strong> Product managers are leveraging agile methodologies and cross-functional teams to speed up product development cycles. The rise of customer-centric approaches is driving the need for continuous innovation and rapid iteration based on user feedback.</p>
+            <hr>
+        </li>
+        <li>
+            <h3>Project Manager - <em>Management</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Expect to be asked about your experience with project planning, budgeting, and risk management. Be ready to discuss specific projects you've managed, how you ensured they stayed on track, and how you handled unforeseen challenges. Proficiency with project management tools like MS Project or Asana may be tested.</p>
+            <hr>
+            <p><strong>News:</strong> Project managers are embracing agile methodologies and digital project management tools to increase flexibility and efficiency. The rise of remote work has also pushed the need for more effective virtual collaboration strategies and tools. There's an increased emphasis on continuous learning and certification in project management practices.</p>
+            <hr>
+        </li>
+        <li>
+            <h3>Financial Manager - <em>Management</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong>  Be prepared to discuss your experience in financial planning, analysis, and reporting. Expect questions on how you've managed budgets, performed financial forecasting, and advised on investment opportunities. Your ability to interpret financial data and provide strategic recommendations will be key.</p>
+            <hr>
+            <p><strong>News:</strong> Financial managers are focusing on navigating economic uncertainties and adapting financial strategies to volatile markets. There's a growing trend towards using advanced financial analytics and AI to improve decision-making. Sustainability and ESG (Environmental, Social, and Governance) reporting are also becoming more prominent in financial management practices.</p>
+            <hr>
+        </li>
+        <li>
             <h3>Graphic Designer - <em>Creative Multimedia</em></h3>
             <hr>
             <p><strong>Interview Details:</strong> Candidates should prepare a portfolio to showcase their design skills.</p>
@@ -144,29 +246,31 @@
             <hr>
         </li>
         <li>
-            <h3>Library Assistant - <em>Other Than MMU (Chemistry)</em></h3>
+            <h3>Animator - <em>Creative Multimedia</em></h3>
             <hr>
-            <p><strong>Interview Details:</strong> Interviews will include a discussion on library management systems and customer service skills.</p>
+            <p><strong>Interview Details:</strong> Prepare to present your animation reel, discuss your animation techniques (2D, 3D, motion graphics, etc.), and your experience with animation software (e.g., Adobe After Effects, Maya). Expect questions on your storytelling ability, character design, and your approach to animation timing and movement.</p>
             <hr>
-            <p><strong>News:</strong> Libraries are evolving to offer digital services, creating opportunities for library assistants.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Secondary School Teacher - <em>Other Than MMU (Chemistry)</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong>  Expect questions about your teaching philosophy, classroom management strategies, and approaches to differentiated instruction.</p>
-            <hr>
-            <p><strong>News:</strong> With the shift to hybrid and online learning, secondary school teachers are incorporating more technology into their lesson plans and adapting to new platforms for student engagement.</p>
+            <p><strong>News:</strong> Animators are exploring immersive technologies like virtual reality (VR) and augmented reality (AR) to create interactive and engaging experiences. The demand for animation in gaming, advertising, and educational content is increasing, driving the need for skilled animators.</p>
             <hr>
         </li>
         <li>
-            <h3>Pharmacist - <em>Other Than MMU (Chemistry)</em></h3>
+            <h3>Video Editor - <em>Creative Multimedia</em></h3>
             <hr>
-            <p><strong>Interview Details:</strong>  Be prepared to discuss your knowledge of pharmaceuticals, patient counseling skills, and understanding of regulatory requirements.</p>
+            <p><strong>Interview Details:</strong> Be ready to showcase your video editing portfolio, proficiency with editing software (e.g., Adobe Premiere Pro, Final Cut Pro), and your ability to tell compelling visual stories. Expect questions on your workflow, attention to detail, and how you handle tight deadlines.</p>
             <hr>
-            <p><strong>News:</strong>  Pharmacists are playing a crucial role in vaccine distribution efforts and providing information on COVID-19 treatments, contributing to public health efforts globally.</p>
+            <p><strong>News:</strong> Video editors are adapting to the growing demand for short-form video content on social media platforms like TikTok and Instagram Reels. Remote collaboration tools and cloud-based editing solutions are becoming more prevalent, allowing editors to work efficiently from anywhere.</p>
+            <hr>
+        </li>
+        <li>
+            <h3>Content Creater - <em>Creative Multimedia</em></h3>
+            <hr>
+            <p><strong>Interview Details:</strong> Prepare to discuss your content creation portfolio, your understanding of social media algorithms and trends, and your ability to engage with a target audience. Expect questions on your content strategy, brand collaborations, and how you measure the success of your content.</p>
+            <hr>
+            <p><strong>News:</strong> Social media content creators are diversifying their content formats to include short-form videos, live streams, and interactive content like polls and quizzes. With the rise of influencer marketing, content creators are partnering with brands to create authentic and relatable content for their audiences.</p>
             <hr>
         </li>
     </ul>
+    <a href="{{ url_for('companyname') }}" class="button">View companies that are hiring for part-time jobs in Malaysia</a>
+</div>
 </body>
 </html>

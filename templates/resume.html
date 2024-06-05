@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Link to Google Fonts -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .resume-section {
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #007bff; /* Highlight border color on focus */
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 style="text-align: center;">Resume Builder</h1>
+        </header>
+        <section class="resume-section">
+            <h2 style="text-align: center;">Personal Information</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name">
+                <label for="contact">Contact Information:</label>
+                <input type="text" id="contact" name="contact" placeholder="Your Contact Information">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" placeholder="Your Address">
+            </form>
+        </section>
+        <section class="resume-section">
+            <h2 style="text-align: center;">Objective or Summary</h2>
+            <form>
+                <textarea id="objective" name="objective" rows="4" placeholder="A brief statement summarizing your career goals or what you're seeking in a part-time job."></textarea>
+            </form>
+        </section>
+        <section class="resume-section">
+            <h2 style="text-align: center;">Work Experience</h2>
+            <form>
+                <textarea id="work-experience" name="work-experience" rows="4" placeholder="Detail any relevant part-time jobs, internships, or volunteer positions you've held. Include the company name, your job title, dates of employment, and key responsibilities or achievements."></textarea>
+            </form>
+        </section>
+        <section class="resume-section">
+            <h2 style="text-align: center;">Skills</h2>
+            <form>
+                <textarea id="skills" name="skills" rows="4" placeholder="Highlight any relevant skills such as language proficiency, computer skills, technical skills, or soft skills like communication or teamwork."></textarea>
+            </form>
+        </section>
+        <section class="resume-section">
+            <h2 style="text-align: center;">Achievements</h2>
+            <form>
+                <textarea id="achievements" name="achievements" rows="4" placeholder="Include any relevant awards, honors, scholarships, or accomplishments that demonstrate your abilities and dedication."></textarea>
+            </form>
+        </section>
+        <section class="resume-section">
+            <h2 style="text-align: center;">Extracurricular Activities</h2>
+            <form>
+                <textarea id="extracurricular" name="extracurricular" rows="4" placeholder="Mention any clubs, sports teams, or organizations you're involved with, especially if they"></textarea>
+            </form>
+        </section>
+        <section class="resume-section">
+            <h2 style="text-align: center;">Additional Information</h2>
+            <form>
+                <textarea id="additional-info" name="additional-info" rows="4" placeholder="You may want to include any additional relevant information, such as certifications, courses, or projects that showcase your skills and experience."></textarea>
+            </form>
+        </section>
+        <section class="resume-section">
+            <h2 style="text-align: center;">References</h2>
+            <form>
+                <textarea id="references" name="references" rows="4" placeholder="Optionally, provide the names and contact information of references who can vouch for your character and work ethic."></textarea>
+            </form>
+        </section>
+        <footer style="text-align: center;">
+            <button type="submit">Generate Resume</button>
+        </footer>
+        
+        <footer style="text-align: center;">
+            <button type="submit">Attach Resume</button>
+        </footer>
+    </div>
+</body>
+</html>
