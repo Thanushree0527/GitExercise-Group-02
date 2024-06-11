@@ -1,0 +1,9 @@
+def init_db():
+    conn = get_db_connection()
+    with app.open_resource('setup.sql', mode='r') as f:
+        conn.executescript(f.read())
+    conn.commit()
+    conn.close()
+
+with app.app_context():
+    init_db()
