@@ -12,20 +12,28 @@
         }
         header {
             width: 100%;
-            padding: 20px;
+            padding: 90px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: #f5f5f5; /* Light grey for header contrast */
+            background-image: url('{{ url_for('static', filename='1chome.png') }}'); /* Set chome.png as background */
+            background-size: 70%; /* Zoom out the background image */
+            background-position: center; /* Center the background image */
             animation: slideDown 1s ease-out;
+            position: relative; /* Add this line */
         }
         header img {
-            width: 150px; /* Standard size */
+            width: 150px; 
             height: auto;
+            position: absolute; 
+            top: 20px;
+            left: 20px; 
+            animation: slideDown 1s ease-out;
         }
         .nav-links {
             display: flex;
             gap: 20px;
+            margin-left: auto; /* Add this line */
         }
         .nav-links a {
             color: white;
@@ -50,7 +58,6 @@
         .menu {
             position: relative;
             display: inline-block;
-            animation-delay: 2s;
             opacity: 0;
             animation: popUp 1s forwards;
         }
@@ -87,6 +94,41 @@
             text-align: center;
             margin-top: 50px;
         }
+        .chat-box {
+            background: #ccc; /* Grey background for the chat box */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px; /* Medium size width */
+            margin: 50px auto;
+            animation: slideUp 1s forwards;
+        }
+        #chat-box {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
         @keyframes slideDown {
             from {
                 transform: translateY(-100%);
@@ -105,6 +147,14 @@
                 opacity: 1;
             }
         }
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -116,8 +166,9 @@
             <div class="menu">
                 <span class="menu-icon">&#x22EE;</span>
                 <div class="dropdown-content">
-                    <a href="/jobs">View Available Jobs</a>
+                    <a href="/resume">Apply</a>
                     <a href="/contact">Contact Us</a>
+                    <a href="/faq">FAQ</a>
                 </div>
             </div>
         </div>
@@ -125,6 +176,56 @@
     <main>
         <h1>Welcome to Part-Time Jobs Portal MMU</h1>
         <p>Welcome to MMU Part-Time Jobs, your dedicated portal for balancing work and study! Whether you're looking for a flexible job to fit around your classes or aiming to gain valuable work experience, we have a variety of opportunities just for you. Explore our listings, create a standout profile, and connect with local employers. Your perfect part-time job is just a few clicks away!</p>
-    </main>
-</body>
-</html>
+    
+        <audio controls autoplay id="bg-music">
+            <source src="{{ url_for('static', filename='next-gen vision.wav') }}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="chat-box"> 
+            <form id="chat-form" action="/submit_chat" method="post"> 
+                <input type="text" id="first-name" name="firstName" placeholder="First Name" required> 
+                <input type="text" id="last-name" name="lastName" placeholder="Last Name" required>
+                <input type="email" id="email" name="email" placeholder="Email" required> 
+                <input type="text" id="mobile" name="mobile" placeholder="Mobile" required> 
+                <input type="text" id="nationality" name="nationality" placeholder="Nationality" required> 
+                <input type="text" id="interested-job" name="interestedJob" placeholder="Interested Part-time Job" required> 
+                <textarea id="inquiries" name="inquiries" placeholder="Any Inquiries" required></textarea> 
+                <button type="submit">Submit</button> 
+            </form> 
+        </div> 
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var audio = document.getElementById("bg-music");
+                var playing = false;
+            
+                audio.addEventListener("playing", function() {
+                    playing = true;
+                });
+            
+                audio.addEventListener("pause", function() {
+                    playing = false;
+                });
+            
+                // Save the current playback time before leaving the page
+                window.addEventListener("beforeunload", function() {
+                    localStorage.setItem("audioTime", audio.currentTime);
+                    localStorage.setItem("audioPlaying", playing);
+                });
+            
+                // Restore the playback state when loading the page
+                window.addEventListener("load", function() {
+                    var audioTime = localStorage.getItem("audioTime");
+                    var audioPlaying = localStorage.getItem("audioPlaying");
+            
+                    if (audioTime !== null && audioPlaying !== null && audioPlaying === "true") {
+                        audio.currentTime = parseFloat(audioTime);
+                        audio.play();
+                    }
+                });
+            });
+            </script>            
+    </main> 
+</body> 
+</html> 

@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Jobs</title>
     <style>
         body {
-            background-color: #f0f0f0;
+            background-color: #121212; /* Dark background color */
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #000;
         }
-
+        header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            justify-content: flex-start;
+            animation: slideDown 1s ease-out;
+        }
+        header img {
+            width: 150px; /* Standard size */
+            height: auto;
+        }
+                .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .contact-header h1 {
+            font-size: 48px;
+            margin: 0;
+            display: inline-block;
+            padding: 10px 20px; 
+            border-radius: 30px; 
+            background-color: #ccc;
+            animation: popUp 1s ease-in-out;
+        }
         h1 {
             text-align: center;
             margin-top: 20px;
@@ -16,17 +45,23 @@
 
         .job-list {
             width: 80%;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out; /* Fade-in animation */
         }
 
         .job-list li {
             margin-bottom: 30px;
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
+            transition: transform 0.3s; /* Smooth transition for card flip animation */
+        }
+
+        .job-list li:hover {
+            transform: scale(1.02); /* Scale up on hover */
         }
 
         .job-list li h3 {
@@ -42,131 +77,169 @@
             border-top: 1px solid #ddd;
             margin: 10px 0;
         }
+
+        .button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            background: #808080; /* Change to grey */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        
+        .button:hover {
+            background: #696969; /* Darker grey on hover */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .link {
+            text-align: center;
+        }
+        
+        .link a {
+            color: #666; 
+            text-decoration: underline;
+        }
+        
+        .link a:hover {
+            color: #333; 
+        }
+
+        .delete-button {
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .delete-button:hover {
+            background-color: #e60000;
+        }
+        
+        .add-job-form {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .add-job-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .add-job-form label {
+            display: block;
+            margin: 0 auto 10px;
+            text-align: left;
+            width: calc(100% - 20px);
+        }
+        
+        .add-job-form input, .add-job-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 0 auto 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    </header>
+
+    <audio id="bg-music" controls>
+        <source src="{{ url_for('static', filename='next-gen vision.wav') }}" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+
     <h1>Available Jobs</h1>
+    
     <ul class="job-list">
+        {% for job in jobs %}
         <li>
-            <h3>Software Developer - <em>Computing and Informatics</em></h3>
+            <h3>{{ job.title }} - <em>{{ job.faculty }}</em></h3>
             <hr>
-            <p><strong>Interview Details:</strong> Interviews will be conducted online via video call.</p>
+            <p><strong>Interview Details:</strong> {{ job.interview_details }}</p>
             <hr>
-            <p><strong>News:</strong> Demand for software developers is increasing due to the rise of technology companies.</p>
+            <p><strong>News:</strong> {{ job.news }}</p>
             <hr>
+            <form action="{{ url_for('delete_job', job_id=job.id) }}" method="post">
+                <button type="submit" class="delete-button">Delete</button>
+            </form>
         </li>
-        <li>
-            <h3>Data Scientist - <em>Computing and Informatics</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Candidates should be prepared for a technical assessment during the interview process.</p>
-            <hr>
-            <p><strong>News:</strong> Data science skills are highly sought after in various industries.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Information Security Analyst - <em>Computing and Informatics</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Interviews will include discussions on cybersecurity best practices.</p>
-            <hr>
-            <p><strong>News:</strong> With the increase in cyber threats, there is a growing demand for information security professionals.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Mechanical Engineer - <em>Engineering</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Candidates will undergo a technical interview focusing on engineering principles.</p>
-            <hr>
-            <p><strong>News:</strong> Mechanical engineering jobs are in demand, especially in manufacturing and renewable energy sectors.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Electrical Engineer - <em>Engineering</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong>  Expect questions about your experience with circuit design, troubleshooting skills, and knowledge of relevant software and codes.</p>
-            <hr>
-            <p><strong>News:</strong> Renewable energy projects continue to grow, providing opportunities for electrical engineers specializing in solar and wind energy systems.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Chemical Engineer - <em>Engineering</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong>  Prepare to discuss your experience with process optimization, safety protocols, and your understanding of chemical reactions and materials.</p>
-            <hr>
-            <p><strong>News:</strong> With the push for sustainable manufacturing, chemical engineers are increasingly involved in developing eco-friendly production processes and materials.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Marketing Assistant - <em>Management</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Interviews will assess candidates' knowledge of marketing strategies and trends.</p>
-            <hr>
-            <p><strong>News:</strong> Marketing roles are crucial for companies looking to expand their customer base.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Sales Manager - <em>Management</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Be ready to demonstrate your leadership skills, ability to strategize sales campaigns, and track record of meeting targets.</p>
-            <hr>
-            <p><strong>News:</strong> Sales managers are adapting to the rise of e-commerce by incorporating digital marketing strategies and leveraging data analytics for better insights into consumer behavior.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Human Resources Manager - <em>Management</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Expect questions about employee relations, recruitment strategies, and handling conflicts in the workplace.</p>
-            <hr>
-            <p><strong>News:</strong> HR professionals are focusing more on employee well-being and mental health support, especially in the wake of remote work challenges and the pandemic's impact on mental wellness.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Graphic Designer - <em>Creative Multimedia</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Candidates should prepare a portfolio to showcase their design skills.</p>
-            <hr>
-            <p><strong>News:</strong> The demand for graphic designers is increasing with the growth of digital media.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Film Editor - <em>Creative Multimedia</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Prepare to discuss your editing software proficiency, storytelling abilities, and experience collaborating with directors and cinematographers.</p>
-            <hr>
-            <p><strong>News:</strong> Streaming platforms are driving demand for film editors, as they produce original content and repurpose existing material for diverse audiences worldwide.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Web Developer - <em>Creative Multimedia</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Be ready to showcase your coding skills, familiarity with web development frameworks, and experience with responsive design.</p>
-            <hr>
-            <p><strong>News:</strong> The trend towards mobile-first design and the increasing demand for web accessibility features are shaping the priorities of web developers.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Library Assistant - <em>Other Than MMU (Chemistry)</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong> Interviews will include a discussion on library management systems and customer service skills.</p>
-            <hr>
-            <p><strong>News:</strong> Libraries are evolving to offer digital services, creating opportunities for library assistants.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Secondary School Teacher - <em>Other Than MMU (Chemistry)</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong>  Expect questions about your teaching philosophy, classroom management strategies, and approaches to differentiated instruction.</p>
-            <hr>
-            <p><strong>News:</strong> With the shift to hybrid and online learning, secondary school teachers are incorporating more technology into their lesson plans and adapting to new platforms for student engagement.</p>
-            <hr>
-        </li>
-        <li>
-            <h3>Pharmacist - <em>Other Than MMU (Chemistry)</em></h3>
-            <hr>
-            <p><strong>Interview Details:</strong>  Be prepared to discuss your knowledge of pharmaceuticals, patient counseling skills, and understanding of regulatory requirements.</p>
-            <hr>
-            <p><strong>News:</strong>  Pharmacists are playing a crucial role in vaccine distribution efforts and providing information on COVID-19 treatments, contributing to public health efforts globally.</p>
-            <hr>
-        </li>
+        {% endfor %}
     </ul>
+
+    <div class="link">
+        <a href="{{ url_for('companyname') }}" class="button">View companies that are hiring for part-time jobs in Malaysia</a>
+        <a href="{{ url_for('home') }}" class="button">Go to Home Page</a>
+    </div>
+
+    <div class="add-job-form">
+        <h2>Add a New Job</h2>
+        <form action="{{ url_for('jobs') }}" method="post">
+            <label for="title">Job Title</label>
+            <input type="text" id="title" name="title" required>
+            
+            <label for="faculty">Faculty</label>
+            <input type="text" id="faculty" name="faculty" required>
+            
+            <label for="interview_details">Interview Details</label>
+            <textarea id="interview_details" name="interview_details" rows="4" required></textarea>
+            
+            <label for="news">News</label>
+            <textarea id="news" name="news" rows="4" required></textarea>
+            
+            <button type="submit" class="button">Add Job</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("bg-music");
+            var playing = false;
+        
+            audio.addEventListener("playing", function() {
+                playing = true;
+            });
+        
+            audio.addEventListener("pause", function() {
+                playing = false;
+            });
+        
+            // Save the current playback time before leaving the page
+            window.addEventListener("beforeunload", function() {
+                localStorage.setItem("audioTime", audio.currentTime);
+                localStorage.setItem("audioPlaying", playing);
+            });
+        
+            // Restore the playback state when loading the page
+            window.addEventListener("load", function() {
+                var audioTime = localStorage.getItem("audioTime");
+                var audioPlaying = localStorage.getItem("audioPlaying");
+        
+                if (audioTime !== null && audioPlaying !== null && audioPlaying === "true") {
+                    audio.currentTime = parseFloat(audioTime);
+                    audio.play();
+                }
+            });
+        });
+        </script>
 </body>
 </html>
