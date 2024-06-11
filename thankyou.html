@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        body {
+            background-color: #121212; /* Dark background color */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            position: relative;
+            overflow: hidden;
+            color: #f4f4f4; 
+        }
+        h1 {
+            color: #fff;
+            animation: slide-in 1s ease-out forwards;
+        }
+        p {
+            color: #D3D3D3;
+            margin-top: 20px;
+            animation: slide-in 1.5s ease-out forwards;
+        }
+        @keyframes slide-in {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .link a {
+            color: #4b4b4b;
+            text-decoration: none;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
+        .star {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: -10px;
+            background: yellow;
+            clip-path: polygon(
+                50% 0%, 
+                61% 35%, 
+                98% 35%, 
+                68% 57%, 
+                79% 91%, 
+                50% 70%, 
+                21% 91%, 
+                32% 57%, 
+                2% 35%, 
+                39% 35%
+            );
+            animation: falling-star linear infinite;
+        }
+        @keyframes falling-star {
+            0% {
+                transform: translateY(-10px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" controls>
+        <source src="{{ url_for('static', filename='next-gen vision.wav') }}" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+
+    <h1>Thank You for Applying!</h1>
+    <p>Your application for the job has been successfully recorded.We will contact you through email as soon as possible.</p>
+    <p>Wishing you good luck!</p>
+    <script>
+
+        function generateStars() {
+            for (let i = 0; i < 50; i++) {
+                createStar();
+            }
+        }
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.backgroundColor = randomColor();
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.width = star.style.height = Math.random() * 20 + 10 + 'px';
+            star.style.animationDuration = Math.random() * 3 + 2 + 's'; 
+            star.style.animationDelay = Math.random() * 2 + 's'; 
+            document.body.appendChild(star);
+        }
+
+        function randomColor() {
+            const colors = ['#FFD700', '#FF6347', '#ADFF2F', '#00CED1', '#FF69B4'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        window.onload = generateStars;
+    </script>
+
+    <div class="link">
+        <a href="{{ url_for('home') }}" class="button">Go to Home Page</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("bg-music");
+            var playing = false;
+        
+            audio.addEventListener("playing", function() {
+                playing = true;
+            });
+        
+            audio.addEventListener("pause", function() {
+                playing = false;
+            });
+        
+            // Save the current playback time before leaving the page
+            window.addEventListener("beforeunload", function() {
+                localStorage.setItem("audioTime", audio.currentTime);
+                localStorage.setItem("audioPlaying", playing);
+            });
+        
+            // Restore the playback state when loading the page
+            window.addEventListener("load", function() {
+                var audioTime = localStorage.getItem("audioTime");
+                var audioPlaying = localStorage.getItem("audioPlaying");
+        
+                if (audioTime !== null && audioPlaying !== null && audioPlaying === "true") {
+                    audio.currentTime = parseFloat(audioTime);
+                    audio.play();
+                }
+            });
+        });
+        </script>
+</body>
+</html>

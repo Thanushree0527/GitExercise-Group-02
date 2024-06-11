@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Part-Time Job Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Dark background for the whole page */
+            color: #f4f4f4; /* Light text color */
+        }
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1e1e1e; /* Darker background for the container */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+        .faq-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #f4f4f4;
+        }
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .faq-item {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #2c2c2c; /* Slightly lighter dark background for the items */
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            border: 2px solid;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .faq-item:hover {
+            transform: translateY(-10px);
+            background-color: #3a3a3a;
+        }
+        .faq-question {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #f4f4f4;
+        }
+        .faq-answer {
+            margin-top: 5px;
+            padding-left: 20px;
+            text-align: left;
+            font-size: 16px;
+            color: #d4d4d4;
+        }
+        .faq-item button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .faq-item button:hover {
+            background-color: #777;
+            transform: translateY(-5px);
+        }
+
+        /* Custom border colors */
+        .faq-item:nth-child(3n+1) { border-color: #9B59B6; } /* Purple */
+        .faq-item:nth-child(3n+2) { border-color: #FFC0CB; } /* Pink */
+        .faq-item:nth-child(3n+3) { border-color: #F1C40F; } /* Yellow */
+
+        .link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .link a {
+            color: #d4d4d4; 
+            text-decoration: underline;
+        }
+
+        .link a:hover {
+            color: #fff; 
+        }
+
+        header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            animation: slideDown 1s ease-out;
+        }
+        header img {
+            width: 150px;
+            height: auto;
+        }
+        .form-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #2c2c2c;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: left;
+        }
+        .form-item {
+            margin-bottom: 20px;
+        }
+        .form-item label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #f4f4f4;
+        }
+        .form-item input,
+        .form-item textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #555;
+            background-color: #3a3a3a;
+            color: #f4f4f4;
+            font-size: 16px;
+        }
+        .form-item button {
+            padding: 10px 20px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .form-item button:hover {
+            background-color: #777;
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    </header>
+    
+    <audio id="bg-music" controls>
+        <source src="{{ url_for('static', filename='next-gen vision.wav') }}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="faq-container">
+        <h1 class="faq-title">Frequently Asked Questions (FAQ)</h1>
+        <div class="faq-list">
+            {% for faq in faqs %}
+            <div class="faq-item">
+                <div class="faq-question">{{ faq.question }}</div>
+                <div class="faq-answer">{{ faq.answer }}</div>
+                <form action="{{ url_for('delete_faq', faq_id=faq.id) }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+        <form action="{{ url_for('add_faq') }}" method="post" class="form-container">
+            <div class="form-item">
+                <label for="question">Question:</label>
+                <input type="text" id="question" name="question" required>
+            </div>
+            <div class="form-item">
+                <label for="answer">Answer:</label>
+                <textarea id="answer" name="answer" required></textarea>
+            </div>
+            <div class="form-item">
+                <button type="submit">Add FAQ</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="link">
+        <a href="{{ url_for('home') }}" class="button">Go to Home Page</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("bg-music");
+            var playing = false;
+
+            audio.addEventListener("playing", function() {
+                playing = true;
+            });
+
+            audio.addEventListener("pause", function() {
+                playing = false;
+            });
+
+            window.addEventListener("beforeunload", function() {
+                localStorage.setItem("audioTime", audio.currentTime);
+                localStorage.setItem("audioPlaying", playing);
+            });
+
+            window.addEventListener("load", function() {
+                var audioTime = localStorage.getItem("audioTime");
+                var audioPlaying = localStorage.getItem("audioPlaying");
+
+                if (audioTime !== null && audioPlaying !== null && audioPlaying === "true") {
+                    audio.currentTime = parseFloat(audioTime);
+                    audio.play();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

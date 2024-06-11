@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> 
+    <style>
+        body {
+            background-color: black;
+            color: black;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align the logo to the left */
+            animation: slideDown 1s ease-out;
+        }
+        header img {
+            width: 150px; /* Standard size */
+            height: auto;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            margin: 0 auto;
+        }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .contact-header h1 {
+            font-size: 48px;
+            margin: 0;
+            display: inline-block;
+            padding: 10px 20px; 
+            border-radius: 30px; 
+            background-color: #ccc;
+            animation: popUp 1s ease-in-out;
+        }
+        .contact-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .contact-box {
+            background-color: #f0f0f0; 
+            padding: 20px;
+            border-radius: 30px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .contact-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .contact-box h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .contact-box p {
+            color: #666;
+            margin: 0;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        form input[type="email"],
+        form input[type="text"],
+        form button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        form button {
+            background-color: #4b4b4b;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #333;
+        }
+        @media (max-width: 600px) {
+            .contact-box {
+                width: 100%;
+            }
+        }
+        @keyframes popUp {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        .link {
+            text-align: center;
+        }
+        
+        .link a {
+            color: #666; 
+            text-decoration: underline;
+        }
+        
+        .link a:hover {
+            color: #333; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    </header>
+
+    <audio id="bg-music" controls>
+        <source src="{{ url_for('static', filename='next-gen vision.wav') }}" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+      
+    <div class="container">
+        <div class="contact-header animate__animated animate__bounceInDown"> 
+            <h1>CONTACT</h1> 
+        </div>
+        <div class="contact-details">
+            {% for contact in contacts %}
+            <div class="contact-box animate__animated animate__fadeInLeft" data-email="{{ contact['email'] }}"> 
+                <h2>Email</h2>
+                <p>{{ contact['email'] }}</p>
+                <h2>Admission Office Contact</h2>
+                <p>{{ contact['admission_office_contact'] }}</p>
+                <h2>Address</h2>
+                <p>{{ contact['address'] }}</p>
+                <h2>Business Hours</h2>
+                <p>{{ contact['business_hours'] }}</p>
+                <form action="/delete_contact/{{ contact['id'] }}" method="POST" style="display:inline;">
+                    <button class="delete-btn" type="submit">Delete</button>
+                </form>                
+            </div>
+            {% endfor %}            
+        </div>
+        <form action="/contact" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="admission_office_contact" placeholder="Admission Office Contact" required>
+            <input type="text" name="address" placeholder="Address" required>
+            <input type="text" name="business_hours" placeholder="Business Hours" required>
+            <button type="submit">Add Contact</button>
+        </form>
+    </div>
+
+    <div class="link">
+        <a href="{{ url_for('home') }}" class="button">Go to Home Page</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("bg-music");
+            var playing = false;
+        
+            audio.addEventListener("playing", function() {
+                playing = true;
+            });
+        
+            audio.addEventListener("pause", function() {
+                playing = false;
+            });
+        
+            // Save the current playback time before leaving the page
+            window.addEventListener("beforeunload", function() {
+                localStorage.setItem("audioTime", audio.currentTime);
+                localStorage.setItem("audioPlaying", playing);
+            });
+        
+            // Restore the playback state when loading the page
+            window.addEventListener("load", function() {
+                var audioTime = localStorage.getItem("audioTime");
+                var audioPlaying = localStorage.getItem("audioPlaying");
+        
+                if (audioTime !== null && audioPlaying !== null && audioPlaying === "true") {
+                    audio.currentTime = parseFloat(audioTime);
+                    audio.play();
+                }
+            });
+        });
+        </script>
+</body>
+</html>

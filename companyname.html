@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Addresses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #000;
+            overflow-x: hidden;
+        }
+        header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; 
+            animation: slideDown 1s ease-out;
+        }
+        header img {
+            width: 150px; /* Standard size */
+            height: auto;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+        .section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section p {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .section p:before {
+            content: "➜";
+            position: absolute;
+            left: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        .link-box {
+            background-color: #ddd; /* Grey background color */
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0 auto; /* Centering the box */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            grid-column: 1 / -1; /* Span across all columns */
+        }
+        .link-box a {
+            color: #333; /* Dark grey color */
+            text-decoration: underline;
+            font-size: 16px;
+        }
+        
+        .link-box a:hover {
+            color: #000; /* Change to black on hover */
+        }        
+        .add-company-box {
+            background-color: #ddd; /* Grey background color */
+            text-align: center;
+            grid-column: 1 / -1; /* Span across all columns */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0 auto; /* Centering the box */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    </header>
+
+    <audio id="bg-music" controls>
+        <source src="{{ url_for('static', filename='next-gen vision.wav') }}" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+
+    <div class="container">
+        {% for company in companies %}
+            <div class="section">
+                <h2>{{ company.faculty }}</h2>
+                <p><strong>{{ company.company_title }}:</strong> {{ company.address }}</p>
+                <form action="/delete_company" method="POST">
+                    <input type="hidden" name="company_id" value="{{ company.id }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+
+        <div class="section add-company-box">
+            <h2>Add New Company</h2>
+            <form action="/add_company" method="POST">
+                <label for="faculty">Faculty:</label><br>
+                <input type="text" id="faculty" name="faculty" required><br>
+                <label for="company_title">Company Title:</label><br>
+                <input type="text" id="company_title" name="company_title" required><br>
+                <label for="company_address">Company Address:</label><br>
+                <input type="text" id="company_address" name="company_address" required><br>
+                <button type="submit">Add Company</button>
+            </form>
+        </div>
+
+        <div class="link-box">
+            <a href="{{ url_for('home') }}" class="button">Go to Home Page</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("bg-music");
+            var playing = false;
+        
+            audio.addEventListener("playing", function() {
+                playing = true;
+            });
+        
+            audio.addEventListener("pause", function() {
+                playing = false;
+            });
+        
+            // Save the current playback time before leaving the page
+            window.addEventListener("beforeunload", function() {
+                localStorage.setItem("audioTime", audio.currentTime);
+                localStorage.setItem("audioPlaying", playing);
+            });
+        
+            // Restore the playback state when loading the page
+            window.addEventListener("load", function() {
+                var audioTime = localStorage.getItem("audioTime");
+                var audioPlaying = localStorage.getItem("audioPlaying");
+        
+                if (audioTime !== null && audioPlaying !== null && audioPlaying === "true") {
+                    audio.currentTime = parseFloat(audioTime);
+                    audio.play();
+                }
+            });
+        });
+        </script>
+</body>
+</html>
