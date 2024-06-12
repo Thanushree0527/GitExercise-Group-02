@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <form action="/profile" method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="skills">Skills:</label><br>
+        <input type="text" id="skills" name="skills" required><br>
+        <label for="languages">Languages:</label><br>
+        <input type="text" id="languages" name="languages" required><br>
+        <label for="picture">Profile Picture:</label><br>
+        <input type="file" id="picture" name="picture" required><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
